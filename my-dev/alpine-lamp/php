@@ -1,0 +1,12 @@
+#!/bin/sh
+
+docker run \
+    --rm \
+    -i \
+    -v "$HOME":"$HOME":ro \
+    -u $(id -u) \
+    -w "$PWD" \
+    arvindr226/alpine-lamp \
+    php "$@"
+
+exit $?

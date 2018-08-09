@@ -1,0 +1,12 @@
+mysql:
+  image: yobasystems/alpine-mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: hguyFtgfR4r9R4r76
+    MYSQL_DATABASE: wordpressdb
+    MYSQL_USER: mysql
+    MYSQL_PASSWORD: hguyFt6S95dgfR4ryb
+  expose:
+    - "3306"
+  volumes:
+    - /data/example/mysql:/var/lib/mysql
+  restart: always

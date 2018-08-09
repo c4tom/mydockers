@@ -1,0 +1,11 @@
+version: "2.0"
+services:
+  openshift:
+      build: ./
+      container_name: 'openshift'
+      ports: 
+          - '9053:53'
+          - '9443:8443'
+      restart: always
+      privileged: true
+      network_mode: 'host'

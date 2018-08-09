@@ -1,0 +1,17 @@
+version: '2'
+services:
+  xe-11g:
+    image: 'wnameless/oracle-xe-11g'
+    container_name: 'oracle-xe-11g'
+    ports:
+      - '50022:22'
+      - '1521:1521'
+      - '58080:8080'
+    environment:
+      - ORACLE_DISABLE_ASYNCH_IO=true
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_ENABLE_XDB=false
+    volumes: 
+      - '/desenv/db_data/oracle:/opt/oracle'
+    network_mode: 'bridge'
+

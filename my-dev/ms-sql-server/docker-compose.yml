@@ -1,0 +1,16 @@
+version: '2.1'
+services:
+  express:
+    image: 'microsoft/mssql-server-linux:latest'
+    container_name: 'ms-sqlserver-latest'
+    ports:
+      - '1433:1433'
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=#PaSSword!123
+      - MSSQL_PID=Express
+#    volumes: 
+#      - '/desenv/db_data/mssql:/opt/mssql'
+    network_mode: 'bridge'
+
+

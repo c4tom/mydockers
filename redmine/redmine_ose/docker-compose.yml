@@ -1,0 +1,31 @@
+version: '2'
+services:
+  mysql:
+    image: 'registry.access.redhat.com/rhscl/mysql-57-rhel7'
+    container_name: mysql_ose
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=redhat123
+      - MYSQL_DATABASE=redmine
+    restart: always
+    network_mode: 'bridge'
+
+
+  redmine:
+    image: 'redmine'
+    container_name: redmine_ose
+    ports:
+      - '13000:3000'
+    environment: 
+      - REDMINE_DB_USERNAME=admin
+      - REDMINE_DB_MYSQL=172.17.0.2
+      - REDMINE_DB_PASSWORD=redhat123
+      - REDMINE_DB_PORT=3306
+      - REDMINE_DB_DATABASE=redmine
+    depends_on:
+      - mysql
+    restart: always
+    network_mode: 'bridge'
+

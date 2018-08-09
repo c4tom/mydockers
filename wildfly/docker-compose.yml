@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  wildfly:
+    image: 'bitnami/wildfly:latest'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '18080:8080'
+      - '19990:9990'
+    volumes:
+      - 'wildfly_data:/bitnami'
+    environment:
+      - WILDFLY_PASSWORD=password
+
+volumes:
+  wildfly_data:
+    driver: local

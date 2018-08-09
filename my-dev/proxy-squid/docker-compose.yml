@@ -1,0 +1,13 @@
+squid:
+    build: ./.
+    container_name: 'squid_proxy'
+    hostname: 'squid_proxy'
+    ports: 
+        - 3128:3128
+    volumes:
+       - /home/squid/cache:/var/spool/squid
+       - /home/squid/logs:/var/log/squid
+    restart: always
+    tty: true
+    stdin_open: true
+    privileged: false
