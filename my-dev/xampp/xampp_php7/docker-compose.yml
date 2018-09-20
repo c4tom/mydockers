@@ -1,0 +1,21 @@
+version: '2'
+services: 
+  xampp7:
+    build: ./.
+    container_name: xampp_7
+    hostname: xampp_7
+    ports:
+      - '50022:22'
+      - '50080:80'
+      - '53306:3306'
+    restart: always
+    network_mode: bridge
+    volumes:
+       - /home/xampp7/mysql/data:/opt/lampp/var/mysql
+       - /home/xampp7/logs:/opt/lampp/logs
+       - /home/xampp7/www:/opt/lampp/htdocs
+    restart: always
+    tty: true
+    stdin_open: true
+    privileged: false
+    user: root    
