@@ -1,2 +1,25 @@
-app:
-  image: gitlab/gitlab-ce:latest
+#https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-compose
+# ao subir no linux, atentar para:
+# https://docs.gitlab.com/omnibus/docker/#linux-acl-issues
+version: '2'
+services:
+  gitlab-latest:
+    image: 'gitlab/gitlab-ce:latest'
+    container_name: gitlab-latest
+    hostname: gitlab
+    restart: always
+    #hostname: 'gitlab.example.com'
+    #environment:
+      #GITLAB_OMNIBUS_CONFIG: |
+      #  external_url 'https://gitlab.example.com'
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '20080:80'
+      - '20443:443'
+      - '20022:22'
+    volumes:
+      - '/home/gitlab/config:/etc/gitlab'
+      - '/home/gitlab/logs:/var/log/gitlab'
+      - '/home/gitlab/data:/var/opt/gitlab'
+    network_mode: bridge
+    user: root
