@@ -1,0 +1,74 @@
+version: "2.0"
+services:
+  webphp5:
+    build: apache-php56/.
+    container_name: apache_php5.6
+    #image: gotechnies/php-5.6-alpine
+    ports:
+       - "25080:80"
+       - "25443:443"
+    volumes:
+      - /desenv/www/paranalistas/public_html:/var/www/html
+    restart: always
+    network_mode: 'bridge'
+    links: 
+      - 'mysql'
+  webphp7:
+    build: apache-php7/.
+    container_name: apache_php7
+    ports:
+       - "27080:80"
+       - "27443:443"
+    volumes:
+      - /desenv/www/paranalistas/public_html:/var/www/html
+    restart: always
+    network_mode: 'bridge'
+    links: 
+      - 'mysql'
+  mysql:
+    build: mysql/.
+    #image: 'pluie/alpine-mysql'
+    container_name: 'mysql'
+    environment:
+      - MYSQL_DATABASE=mybase         # create specified database at startup
+      - MYSQL_USER=my_user            # create specified user at startup (and grant all rights to MYSQL_DATABASE)
+      - MYSQL_PASSWORD=my_password
+      - MYSQL_ROOT_PASSWORD=r00tr00t
+      - TZ=America/Sao_Paulo
+      - SHENV_CTX=LOCAL     # LOCAL|INT|PROD change context bg color
+      - SHENV_NAME=Mysql    # container name 
+      - SHENV_COLOR=97      # ANSI EXTENDED COLOR CODEl
+    volumes:
+      - '/desenv/db_data/mysql/data:/var/lib/mysql'
+      - '/desenv/db_data/mysql/dump:/dump'
+      - '/desenv/db_data/mysql/app:/app'
+    ports:
+      - 3306:3306
+    network_mode: 'bridge'
+    restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8080:80
+    volumes:
+     - /sessions
+    network_mode: 'bridge'
+    links: 
+      - 'mysql'    
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - 18080:8080
+    environment:
+      - ADMINER_PLUGINS=
+    restart: always
+    network_mode: 'bridge'
+    links: 
+      - 'mysql'
+
+#Note-: If you want to restart the docker container on system start up, uncomment the restart:always line.
