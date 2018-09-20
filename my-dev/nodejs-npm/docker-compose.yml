@@ -1,0 +1,15 @@
+# http://taswar.zeytinsoft.com/docker-for-nodejs-application-using-vscode/
+# https://blog.risingstack.com/how-to-debug-a-node-js-app-in-a-docker-container/
+
+nodejs:
+    build: ./.
+    container_name: 'nodejs-npm'
+    hostname: 'nodejs'
+    ports: 
+        - 58000:8000
+    volumes:
+       - /home/nodejs:/src
+    restart: always
+    tty: true
+    stdin_open: true
+    privileged: false
