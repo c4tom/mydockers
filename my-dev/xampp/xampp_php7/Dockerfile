@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update --fix-missing
 
 # curl is needed to download the xampp installer, net-tools provides netstat command for xampp
-RUN apt-get -y install --no-install-recommends net-tools curl supervisor openssh-server vim less
+RUN apt-get -y install --no-install-recommends net-tools curl supervisor openssh-server vim less unzip
 RUN cd /root
 
 RUN curl -k -o xampp-linux-installer.run 'https://downloadsapachefriends.global.ssl.fastly.net/7.2.9/xampp-linux-x64-7.2.9-0-installer.run?from_af=true'
@@ -31,6 +31,11 @@ RUN ln -s /www /opt/lampp/htdocs/
 
 VOLUME [ "/opt/lampp/logs", "/opt/lampp/htdocs" ]
 # "/opt/lampp/var/mysql", 
+
+ADD oci.x64-18.3.0.0.0dbru.zip /tmp
+RUN cd /tmp ; unzip oci.x64-18.3.0.0.0dbru.zip; mv instantclient_18_3 /opt; \
+     ln -sf instantclient_18_3 /opt/lampp/lib/instantclient-11.2.0.3.0
+
 
 EXPOSE 3306 80 22
 
