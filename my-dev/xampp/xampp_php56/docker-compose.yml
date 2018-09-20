@@ -1,0 +1,21 @@
+version: '2'
+services: 
+  xampp56:
+    build: ./.
+    container_name: xampp_56
+    hostname: xampp_56
+    ports:
+      - '40022:22'
+      - '40080:80'
+      - '43306:3306'
+    restart: always
+    network_mode: bridge
+    volumes:
+       - /home/xampp56/mysql/data:/opt/lampp/var/mysql
+       - /home/xampp56/logs:/opt/lampp/logs
+       - /home/xampp56/www:/opt/lampp/htdocs
+    restart: always
+    tty: true
+    stdin_open: true
+    privileged: false
+    user: root    
