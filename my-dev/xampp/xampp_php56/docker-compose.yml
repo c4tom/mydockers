@@ -4,18 +4,22 @@ services:
     build: ./.
     container_name: xampp_56
     hostname: xampp_56
+    dns:
+      - localhost
+      - 1.1.1.1
     ports:
       - '40022:22'
       - '40080:80'
       - '43306:3306'
-    restart: always
     network_mode: bridge
     volumes:
-       - /home/xampp56/mysql/data:/opt/lampp/var/mysql
-       - /home/xampp56/logs:/opt/lampp/logs
-       - /home/xampp56/www:/opt/lampp/htdocs
+      - /home/docker/mysql/xampp56:/opt/lampp/var/mysql
+      - /home/docker/logs:/opt/lampp/logs
+      - /home/docker/tools:/tools
+      - /home/docker/web:/web
+      - /home/docker/xamp_56/etc:/opt/lampp/etc
     restart: always
     tty: true
     stdin_open: true
-    privileged: false
-    user: root    
+    privileged: true
+    #user: www-data
