@@ -1,21 +1,45 @@
-version: '2'
+# Instrução:
+# Primeiramente faça um build então suba este docker-compose
+# docker run --rm -d -p 22:22/tcp -p 3306:3306/tcp -p 80:80/tcp -v /home/xampp7/www:/opt/lampp/htdocs  xampp_php7:latest
+version: '3.2'
 services: 
   xampp7:
     build: ./.
+    #image: xampp_php7:latest
     container_name: xampp_7
     hostname: xampp_7
+    dns:
+      - localhost
+      - 1.1.1.1
     ports:
       - '50022:22'
       - '50080:80'
       - '53306:3306'
-    restart: always
-    network_mode: bridge
+    # https://docs.docker.com/compose/compose-file/#network_mode
+    network_mode: "bridge"
     volumes:
-       - /home/xampp7/mysql/data:/opt/lampp/var/mysql
-       - /home/xampp7/logs:/opt/lampp/logs
-       - /home/xampp7/www:/opt/lampp/htdocs
+      - /home/docker/mysql/xampp7:/opt/lampp/var/mysql
+      - /home/docker/logs:/opt/lampp/logs
+      - /home/docker/tools:/tools
+      - /home/docker/web:/web
+
+    environment:
+      - VOLUME=/web/html
+      - DOCKER_USER=www-data
+      - DOCKER_GROUP=www-data
+      - HOST_USER_ID=1000
+      - HOST_GROUP_ID=1000
+    #entrypoint: /tools/entrypoint
     restart: always
-    tty: true
-    stdin_open: true
-    privileged: false
-    user: root    
+    #tty: true
+    #stdin_open: true
+    #privileged: false
+    #user: root    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: syslog
+    #command: ["ps","aux"]
