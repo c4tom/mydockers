@@ -1,0 +1,14 @@
+#https://mherman.org/blog/dockerizing-an-angular-app/
+
+version: '3.5'
+services:
+  something-clever:
+    container_name: angular-js
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'
