@@ -18,8 +18,8 @@ services:
       - '20443:443'
       - '20022:22'
     volumes:
-      - '/home/gitlab/config:/etc/gitlab'
-      - '/home/gitlab/logs:/var/log/gitlab'
-      - '/home/gitlab/data:/var/opt/gitlab'
+      - '/home/docker/gitlab/config:/etc/gitlab'
+      - '/home/docker/gitlab/logs:/var/log/gitlab'
+      - '/home/docker/gitlab/data:/var/opt/gitlab'
     network_mode: bridge
     user: root
