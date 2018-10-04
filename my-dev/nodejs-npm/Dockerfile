@@ -9,7 +9,7 @@ RUN mkdir -p /src/
 # Install dependencies
 WORKDIR /src/
 
-VOLUME .:/src/
+VOLUME ["/src"]
 
 # Expose the app port
 EXPOSE 8000
