@@ -1,0 +1,18 @@
+version: "2.0"
+services:
+  vestacp:
+    build: ./.
+    container_name: vestacp
+    hostname: vestacp
+    restart: always
+    network_mode: bridge
+    ports: 
+      - "15022:22"
+      - "15080:80"
+      - "53:53"
+      - "110:110"
+      - "15443:443"
+      - "15306:3306"
+      - "8083:8083"
+    environment: 
+      - ADMIN_APENAS_REF=MakeItSo18
