@@ -49,6 +49,8 @@ RUN sed -i.bak s'#/opt/lampp/htdocs#/web/html#' /opt/lampp/etc/httpd.conf
 RUN mkdir /opt/lampp/apache2/conf.d && \
     echo "IncludeOptional /opt/lampp/apache2/conf.d/*.conf" >> /opt/lampp/etc/httpd.conf
 
+#RUN echo "<Directory />\nOptions FollowSymLinks Indexes\nAllowOverride None\n</Directory>"  > /opt/lampp/etc/extra/httpd-cht.conf
+
 RUN apt-get clean
 VOLUME [ "/opt/lampp/logs", "/opt/lampp/var/mysql", "/web", "/opt/lampp/etc" ] 
 EXPOSE 3306 80 22

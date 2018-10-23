@@ -13,11 +13,13 @@ services:
       - '43306:3306'
     network_mode: bridge
     volumes:
-      - /home/docker/mysql/xampp56:/opt/lampp/var/mysql
+      #- /home/docker/mysql/xampp56:/opt/lampp/var/mysql
+      - /home/docker/mysql/bancodedados:/opt/lampp/var/mysql
       - /home/docker/logs:/opt/lampp/logs
       - /home/docker/tools:/tools
       - /home/docker/web:/web
       - /home/docker/xamp_56/etc:/opt/lampp/etc
+      #- /etc/hosts:/etc/hosts
     restart: always
     tty: true
     stdin_open: true
