@@ -18,10 +18,12 @@ services:
     # https://docs.docker.com/compose/compose-file/#network_mode
     network_mode: "bridge"
     volumes:
-      - /home/docker/mysql/xampp7:/opt/lampp/var/mysql
+      #- /home/docker/mysql/xampp7:/opt/lampp/var/mysql
+      - /home/docker/mysql/bancodedados:/opt/lampp/var/mysql
       - /home/docker/logs:/opt/lampp/logs
       - /home/docker/tools:/tools
       - /home/docker/web:/web
+      - /home/docker/xamp_7/etc:/opt/lampp/etc
 
     environment:
       - VOLUME=/web/html
