@@ -1,0 +1,9 @@
+version: '3'
+services:
+  alpine-angular2:
+    container_name: alpine-angular2
+    build: .
+    ports:
+     - "4200:4200"
+    volumes:
+     - .:/usr/src/app
