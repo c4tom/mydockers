@@ -1,0 +1,23 @@
+RUN bash vst-install-debian.sh \
+		--interactive no \
+		--nginx no \
+		--phpfpm yes \
+		--apache yes \
+		--named yes \
+		--remi no \
+		--vsftpd no \
+		--proftpd no \
+		--iptables no \
+		--fail2ban no \
+		--quota no \
+		--exim yes \
+		--dovecot yes \
+		--spamassassin no \
+		--clamav no \
+		--mysql yes \
+		--postgresql no \
+        --softaculous yes \
+        --hostname local.host \
+        --email root@localhost \
+        --force \
+        --password r00tr00t

@@ -1,0 +1,11 @@
+version: "2.0"
+services:
+  vestacp_cht:
+    build: ./.
+    container_name: vestacp_cht
+    hostname: vestacp_cht
+    restart: always
+    network_mode: bridge
+    tty: true
+    stdin_open: true
+    privileged: false
