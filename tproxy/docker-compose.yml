@@ -1,0 +1,30 @@
+version: "2"
+services:
+    squid:
+        build: squid/.
+        container_name: 'squid_proxy'
+        hostname: 'squid_proxy'
+        image: squid:latest
+        ports: 
+            - 3128:3128
+        volumes:
+            - /home/docker/squid/cache:/var/spool/squid
+            - /home/docker/squid/logs:/var/log/squid
+        restart: always
+
+        environment:
+            - "DISK_CACHE_SIZE=5000"
+            - "MAX_CACHE_OBJECT=1000"
+            # - "SQUID_DIRECTIVES_ONLY=true"
+            # - "SQUID_DIRECTIVES='refresh_pattern . 0 0 1 refresh-ims'"
+        network_mode: 'bridge'
+
+    tproxy:
+        build: iptables_docker/.
+        image: tproxy:latest
+        container_name: tproxy
+        hostname: 'tproxy'
+        links: 
+            - "squid"
+        privileged: true
+        network_mode: 'bridge'
