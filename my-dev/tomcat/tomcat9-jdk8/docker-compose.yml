@@ -1,0 +1,17 @@
+version: "2.3"
+services:
+  tomcat9:
+    build: ./.
+    container_name: tomcat9
+    hostname: tomcat9
+    image: tomcat9:openjdk-8
+    restart: always
+    network_mode: bridge
+    tty: true
+    stdin_open: true
+    privileged: false
+    ports: 
+      - "38080:8080"
+    network_mode: "bridge"
+    volumes:
+      - /home/docker/tomcat/9/deploy:/usr/local/tomcat/webapps
